@@ -4,9 +4,15 @@ import React, {
   useRef,
   forwardRef,
   useImperativeHandle,
+  useCallback,
+  useEffect,
 } from 'react';
 import {View, StyleSheet, Text, Keyboard} from 'react-native';
-import {BottomSheetModal, BottomSheetTextInput} from '@gorhom/bottom-sheet';
+import {
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+  BottomSheetTextInput,
+} from '@gorhom/bottom-sheet';
 import {Colors, Size} from '@theme';
 import {AnimatedButtonList} from '@lib';
 import {
@@ -19,6 +25,7 @@ import {ITask, TaskStatusEnum} from '@interface';
 import {createAccessibleTestProps, uuidv4} from '@utils';
 import {IS_IOS} from '@src/constants';
 import {useAppDispatch} from '@src/hook';
+import {BottomSheetVBackdrop} from '@src/lib/BottomSheetVBackdrop';
 
 export interface ITaskBottomSheet {
   item?: ITask;
@@ -49,15 +56,31 @@ const TaskBottomSheet = forwardRef((props: ITaskBottomSheet, ref) => {
   const dispatch = useAppDispatch();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
+  useEffect(() => {
+    const keyboardWillHideListener = Keyboard.addListener(
+      'keyboardWillHide',
+      () => {
+        bottomSheetRef?.current?.forceClose();
+      },
+    );
+
+    return () => {
+      keyboardWillHideListener.remove();
+    };
+  }, []);
+
   useImperativeHandle(
     ref,
     () => ({
       present: () => {
         setText(item?.content ?? '');
         setPriority(item?.priority ?? PRIORITY_LIST_TEXT[0]);
-        setTimeout(() => {
-          bottomSheetRef?.current?.present();
-        }, 200);
+        setTimeout(
+          () => {
+            bottomSheetRef?.current?.present();
+          },
+          IS_IOS ? 0 : 500,
+        );
       },
     }),
     [item?.content, item?.priority],
@@ -85,27 +108,33 @@ const TaskBottomSheet = forwardRef((props: ITaskBottomSheet, ref) => {
         );
       }
 
-      closeSheet();
+      close();
     }
   };
 
-  const closeSheet = () => {
-    Keyboard.dismiss();
-    setTimeout(() => {
-      bottomSheetRef?.current?.forceClose();
-    }, 200);
+  const close = () => {
+    IS_IOS && Keyboard.dismiss();
+    bottomSheetRef?.current?.forceClose();
   };
 
   const onSelectPriority = (newPriority: string) => {
     setPriority(newPriority);
   };
 
+  const renderBackdrop = useCallback(
+    (sheetProps: BottomSheetBackdropProps) => (
+      <BottomSheetVBackdrop {...sheetProps} pressBehavior={'close'} />
+    ),
+    [],
+  );
   // renders
   return (
     <BottomSheetModal
       backgroundStyle={styles.root}
       ref={bottomSheetRef}
       index={0}
+      onDismiss={!IS_IOS ? Keyboard.dismiss : () => {}}
+      backdropComponent={renderBackdrop}
       {...createAccessibleTestProps(testID)}
       handleIndicatorStyle={styles.handleIndicator}
       snapPoints={snapPoints}>
