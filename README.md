@@ -53,3 +53,9 @@ You can use this command to run unit test
 yarn test
 ```
 
+# Screenshots
+
+<img width="343" alt="Screenshot 2023-07-22 at 19 01 22" src="https://github.com/huytran125/ToDoAppDemo/assets/64766573/713b27dd-9c38-4f04-8c7a-659ef31ee2b4">
+<img width="353" alt="Screenshot 2023-07-22 at 19 01 14" src="https://github.com/huytran125/ToDoAppDemo/assets/64766573/259663d7-58d7-49b8-9d47-e99787469ffe">
+<img width="319" alt="Screenshot 2023-07-22 at 19 01 03" src="https://github.com/huytran125/ToDoAppDemo/assets/64766573/4bcc188f-8f4d-488f-98a3-3deee24a1a57">
+
