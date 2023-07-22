@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/BeVietnamPro-Italic.ttf",
+      "sha1": "cd74c031ed87c52f81b12e1886133283f36cc44a"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-Light.ttf",
+      "sha1": "4c7d4497bc6b506d9fefdc8227418bbb637bc524"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-LightItalic.ttf",
+      "sha1": "e6985b646a67ed2885e15c3f5b23dab28246621b"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-Medium.ttf",
+      "sha1": "7525dd63d853386f3c192fa78502e547ea620e96"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-MediumItalic.ttf",
+      "sha1": "b1d0a7a04e0b02414e50a69d8c7c952e42abea20"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-Regular.ttf",
+      "sha1": "03d9e7cd56b446b0585b36a46c3f4b140c6e0026"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-SemiBold.ttf",
+      "sha1": "1b8668d1e0f6949d9a702c2a590971ab7946a79f"
+    },
+    {
+      "path": "src/assets/fonts/BeVietnamPro-SemiBoldItalic.ttf",
+      "sha1": "6d432d0456dfc9f59a091444b5aae82f35c3df2d"
+    }
+  ]
+}
